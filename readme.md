@@ -45,8 +45,9 @@ Home Page: GET /
 
 Displays a search form and lists CVE entries.
 Supports filtering by CVE ID, year, and last modified date.
-CVE Details Page: GET /{cve_id}
 
+
+CVE Details Page: GET /{cve_id}
 Displays detailed information about a specific CVE entry.
 
 **Templates and Static Files**
