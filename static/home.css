@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 body {
     background: #030301;
     font-family: 'Arial', sans-serif;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Header Styling */
+
 header {
     color: #FFCF56;
     font-size: 26px;
@@ -18,7 +18,7 @@ header {
     font-weight: bold;
 }
 
-/* Main Container */
+
 .container {
     width: 80%;
     margin: 20px auto;
@@ -28,7 +28,7 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Search Form */
+
 .search-form {
     display: flex;
     flex-wrap: wrap;
@@ -82,7 +82,7 @@ header {
 .cve-table th, .cve-table td {
     padding: 12px;
     text-align: left;
-    border: 2px solid #FFCF56; /* Consistent yellow border */
+    border: 2px solid #FFCF56; 
 }
 
 .cve-table th {
@@ -124,7 +124,7 @@ header {
     transform: scale(1.05);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .container {
         width: 90%;
@@ -133,17 +133,17 @@ header {
         flex-direction: column;
     }
 }
-/* Hyperlink Styling */
+
 a {
-    color: #00FFFF; /* Light cyan (sky blue) */
+    color: #00FFFF; 
     transition: color 0.2s ease;
     text-decoration: none;
 }
 
 a:hover {
-    color: #FFD700; /* Golden yellow on hover */
+    color: #FFD700;
 }
 
 a:visited {
-    color: #FFA500; /* Light orange for visited links */
+    color: #FFA500; 
 }
