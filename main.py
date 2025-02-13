@@ -25,8 +25,8 @@ class CVEEntry(Base):
     __tablename__ = "CVE_Entries"
     id = Column(String, primary_key=True, index=True)
     identifier = Column(String)
-    published_date = Column(String)  # YYYY-MM-DD format expected
-    last_modified_date = Column(String)  # YYYY-MM-DD format expected
+    published_date = Column(String)  
+    last_modified_date = Column(String)
     status = Column(String)
 
 class CVEDetail(Base):
@@ -64,38 +64,32 @@ def home(
 ):
     print("received request")
     print(f"🔎 Received search_type: {search_type}, search_value: {search_value}, page: {page}")
-
     per_page = 50
     query = db.query(CVEEntry).join(CVEDetail, CVEEntry.id == CVEDetail.id)  # Join CVEEntry and CVEDetail
-
     if search_type and search_value:
         print(f"🛠 Applying filter: {search_type} = {search_value}")
-        
         if search_type == "cve_id":
             search_pattern = f"%{search_value}%"  # Match any part of the string
             query = query.filter(CVEEntry.id.ilike(search_pattern))
-        
         elif search_type == "year":
             try:
                 query = query.filter(CVEEntry.published_date.startswith(search_value))
             except ValueError:
                 print("Invalid Year Input")
-
         elif search_type == "last_modified":
             try:
                 date_threshold = datetime.utcnow() - timedelta(days=int(search_value))
                 query = query.filter(CVEEntry.last_modified_date >= date_threshold.strftime("%Y-%m-%d"))
             except ValueError:
                 print("Invalid Last Modified Input")
-
     # Debugging: Print Raw Query
-    print(f"🛠 SQL Query: {str(query.statement.compile(db.bind))}")
+    print(f"SQL Query: {str(query.statement.compile(db.bind))}")
 
     total_count = query.count()
     total_pages = max(1, math.ceil(total_count / per_page))
     cves = query.offset((page - 1) * per_page).limit(per_page).all()
 
-    print(f"✅ Found {len(cves)} results")
+    print(f"Found {len(cves)} results")
 
     return templates.TemplateResponse(
         "index.html",
