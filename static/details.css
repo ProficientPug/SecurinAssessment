@@ -1,4 +1,4 @@
-/* General Page Styling */
+
 body {
     background: #030301;
     font-family: 'Arial', sans-serif;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Main Container */
+
 .detail-container {
     width: 70%;
     margin: 20px auto;
@@ -27,7 +27,7 @@ h1 {
 
 /* Section Headers */
 h2 {
-    color: #ffffff; /* Ensuring visibility */
+    color: #ffffff; 
     font-size: 22px;
     margin-top: 20px;
     border-bottom: 2px solid #FFCF56;
@@ -60,7 +60,7 @@ h2 {
 .detail-table th, .detail-table td {
     padding: 12px;
     text-align: left;
-    border: 2px solid #FFCF56; /* Yellow border */
+    border: 2px solid #FFCF56; 
 }
 
 .detail-table th {
@@ -108,7 +108,7 @@ a:hover {
     color: #FFD700;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .detail-container {
         width: 90%;
