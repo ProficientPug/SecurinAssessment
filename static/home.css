@@ -1,0 +1,149 @@
+/* General Page Styling */
+body {
+    background: #030301;
+    font-family: 'Arial', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    color: #FFCF56;
+    font-size: 26px;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid #FFCF56;
+    background: #121212;
+    font-weight: bold;
+}
+
+/* Main Container */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #121212;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-form label {
+    font-size: 18px;
+    color: #FFCF56;
+}
+
+.search-form select,
+.search-form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #FFCF56;
+    background: #1e1e1e;
+    color: white;
+    font-size: 16px;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    background: #ff5555;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.search-form button:hover {
+    background: #ff3333;
+    transform: scale(1.05);
+}
+
+/* CVE Table Styling */
+.cve-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cve-table th, .cve-table td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #FFCF56; /* Consistent yellow border */
+}
+
+.cve-table th {
+    background: #1e1e1e;
+    color: #FFCF56;
+    font-size: 18px;
+    text-align: center;
+}
+
+.cve-table tr:nth-child(even) {
+    background: #2a2b3d;
+}
+
+.cve-table tr:hover {
+    background: #3a3b4d;
+}
+
+/* Pagination Buttons */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background: #ff5555;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.page-btn:hover {
+    background: #ff3333;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    .search-form {
+        flex-direction: column;
+    }
+}
+/* Hyperlink Styling */
+a {
+    color: #00FFFF; /* Light cyan (sky blue) */
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFD700; /* Golden yellow on hover */
+}
+
+a:visited {
+    color: #FFA500; /* Light orange for visited links */
+}

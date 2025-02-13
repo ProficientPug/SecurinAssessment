@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE List - Page {{ page }}</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <header>List of CVEs (Page {{ page }})</header>
+
+    <div class="container">
+        <form method="get" action="/" class="search-form">
+            <input type="hidden" name="page" value="{{ page }}">
+            <label for="search_type">Search by:</label>
+            <select id="search_type" name="search_type" onchange="toggleInputFields()">
+                <option value="" {% if not search_type %}selected{% endif %}>-- Select --</option>
+                <option value="cve_id" {% if search_type == 'cve_id' %}selected{% endif %}>CVE ID</option>
+                <option value="year" {% if search_type == 'year' %}selected{% endif %}>Year</option>
+                <option value="last_modified" {% if search_type == 'last_modified' %}selected{% endif %}>Last Modified (Days)</option>
+            </select>
+        
+            <input type="text" id="search_value" name="search_value" value="{{ search_value or '' }}" placeholder="Enter value" style="display:none;">
+            <button type="submit">Search</button>
+        </form>
+        
+        <table class="cve-table">
+            <tr>
+                <th>ID</th>
+                <th>Identifier</th>
+                <th>Published Date</th>
+                <th>Status</th>
+            </tr>
+            {% for cve in cves %}
+            <tr class="cve-item">
+                <td><a href="/{{ cve.id }}">{{ cve.id }}</a></td>
+                <td>{{ cve.identifier }}</td>
+                <td>{{ cve.published_date }}</td>
+                <td>{{ cve.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="/?page={{ page - 1 }}&search_type={{ search_type }}&search_value={{ search_value }}" class="page-btn">Previous</a>
+            {% endif %}
+
+            <span>Page {{ page }} of {{ total_pages }}</span>
+
+            {% if page < total_pages %}
+                <a href="/?page={{ page + 1 }}&search_type={{ search_type }}&search_value={{ search_value }}" class="page-btn">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function toggleInputFields() {
+            var searchType = document.getElementById("search_type").value;
+            var searchValue = document.getElementById("search_value");
+            searchValue.style.display = searchType ? "inline-block" : "none";
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleInputFields();
+        });
+    </script>
+</body>
+</html>

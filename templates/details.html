@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE Details - {{ cve_entry.id }}</title>
+    <link rel="stylesheet" href="/static/details.css">
+</head>
+<body>
+    <div class="detail-container">
+        <h1>CVE Details for {{ cve_entry.id }}</h1>
+        <div class="detail-info">
+            <p><strong>Identifier:</strong> {{ cve_entry.identifier }}</p>
+            <p><strong>Published Date:</strong> {{ cve_entry.published_date }}</p>
+            <p><strong>Last Modified:</strong> {{ cve_entry.last_modified_date }}</p>
+            <p><strong>Status:</strong> {{ cve_entry.status }}</p>
+        </div>
+
+        <h2>Description</h2>
+        <p class="description">{{ cve_detail.description }}</p> <!-- Added class "description" -->
+
+        <h2>CVSS Metrics</h2>
+        <div class="cvss-metrics"> <!-- Added class "cvss-metrics" -->
+            <table>
+                <tr>
+                    <th>Access Vector</th>
+                    <th>Access Complexity</th>
+                    <th>Authentication</th>
+                    <th>Confidentiality Impact</th>
+                    <th>Integrity Impact</th>
+                    <th>Availability Impact</th>
+                </tr>
+                <tr>
+                    <td>{{ cve_detail.access_vector }}</td>
+                    <td>{{ cve_detail.access_complexity }}</td>
+                    <td>{{ cve_detail.authentication }}</td>
+                    <td>{{ cve_detail.confidentiality_impact }}</td>
+                    <td>{{ cve_detail.integrity_impact }}</td>
+                    <td>{{ cve_detail.availability_impact }}</td>
+                </tr>
+            </table>
+        </div> <!-- End of cvss-metrics div -->
+
+        <h2>Scores</h2>
+        <div class="detail-info">
+            <p><strong>Exploitability Score:</strong> {{ cve_detail.exploitability_score }}</p>
+            <p><strong>Impact Score:</strong> {{ cve_detail.impact_score }}</p>
+        </div>
+
+        <h2>CPE Information</h2>
+        <table>
+            <tr>
+                <th>Criteria</th>
+                <th>Match Criteria ID</th>
+                <th>Vulnerability</th>
+            </tr>
+            <tr>
+                <td>{{ cve_detail.criteria }}</td>
+                <td>{{ cve_detail.match_criteria_id }}</td>
+                <td>{{ cve_detail.vulnerability }}</td>
+            </tr>
+        </table>
+
+        <a href="javascript:history.back()" class="back-btn">Back to Search Results</a>
+        <a href="/" class="back-btn">Home</a>
+    </div>
+</body>
+</html>
