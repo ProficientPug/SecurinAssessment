@@ -1,14 +1,11 @@
 from fastapi import FastAPI, HTTPException, Depends, Query, Request
-from sqlalchemy import create_engine, Column, String, func, Float
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import or_
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import create_engine, Column, String, func, Float, or_
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import math
 from datetime import datetime, timedelta
-
 
 DATABASE_URL = "sqlite:///cve_database.db"
 app = FastAPI()
@@ -41,6 +38,8 @@ class CVEDetail(Base):
     availability_impact = Column(String)
     exploitability_score = Column(Float)
     impact_score = Column(Float)
+    cvss_v2_score = Column(Float)
+    cvss_v3_score = Column(Float)
     criteria = Column(String)
     match_criteria_id = Column(String)
     vulnerability = Column(String)
@@ -52,7 +51,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
 
 @app.get("/", response_class=HTMLResponse)
 def home(
@@ -82,6 +80,13 @@ def home(
                 query = query.filter(CVEEntry.last_modified_date >= date_threshold.strftime("%Y-%m-%d"))
             except ValueError:
                 print("Invalid Last Modified Input")
+        elif search_type == "CVSS_Score":
+            try:
+                score = float(search_value)
+                query = query.filter(or_(CVEDetail.cvss_v2_score >= score, CVEDetail.cvss_v3_score >= score))
+            except ValueError:
+                print("Invalid CVSS Score Input")
+    
     # Debugging: Print Raw Query
     print(f"SQL Query: {str(query.statement.compile(db.bind))}")
 
@@ -102,6 +107,7 @@ def home(
             "search_value": search_value,
         },
     )
+
 # CVE Details Page ("/{cve_id}")
 @app.get("/{cve_id}", response_class=HTMLResponse)
 def get_cve_details(request: Request, cve_id: str, db: Session = Depends(get_db)):
@@ -137,4 +143,5 @@ def get_cve_details(request: Request, cve_id: str, db: Session = Depends(get_db)
         "details.html",
         {"request": request, "cve_entry": cve_entry, "cve_detail": cve_detail},
     )
+
 print(app.routes)

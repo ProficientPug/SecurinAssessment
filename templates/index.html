@@ -18,6 +18,7 @@
                 <option value="cve_id" {% if search_type == 'cve_id' %}selected{% endif %}>CVE ID</option>
                 <option value="year" {% if search_type == 'year' %}selected{% endif %}>Year</option>
                 <option value="last_modified" {% if search_type == 'last_modified' %}selected{% endif %}>Last Modified (Days)</option>
+                <option value="cvss_score" {% if search_type == 'cvss_score' %}selected{% endif %}>CVSS Score (≥)</option>
             </select>
         
             <input type="text" id="search_value" name="search_value" value="{{ search_value or '' }}" placeholder="Enter value" style="display:none;">
@@ -30,6 +31,8 @@
                 <th>Identifier</th>
                 <th>Published Date</th>
                 <th>Status</th>
+                <th>CVSS v2</th>
+                <th>CVSS v3</th>
             </tr>
             {% for cve in cves %}
             <tr class="cve-item">
@@ -37,6 +40,8 @@
                 <td>{{ cve.identifier }}</td>
                 <td>{{ cve.published_date }}</td>
                 <td>{{ cve.status }}</td>
+                <td>{{ cve.detail.cvss_v2_score or 'N/A' }}</td>
+                <td>{{ cve.detail.cvss_v3_score or 'N/A' }}</td>
             </tr>
             {% endfor %}
         </table>
