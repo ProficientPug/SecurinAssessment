@@ -40,10 +40,11 @@
                 <td>{{ cve.identifier }}</td>
                 <td>{{ cve.published_date }}</td>
                 <td>{{ cve.status }}</td>
-                <td>{{ cve.detail.cvss_v2_score or 'N/A' }}</td>
-                <td>{{ cve.detail.cvss_v3_score or 'N/A' }}</td>
+                <td>{{ cve.cvss_v2_score if cve.cvss_v2_score else 'N/A' }}</td>
+                <td>{{ cve.cvss_v3_score if cve.cvss_v3_score else 'N/A' }}</td>
             </tr>
             {% endfor %}
+            
         </table>
 
         <div class="pagination">

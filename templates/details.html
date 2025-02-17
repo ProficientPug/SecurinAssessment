@@ -45,6 +45,18 @@
         <div class="detail-info">
             <p><strong>Exploitability Score:</strong> {{ cve_detail.exploitability_score }}</p>
             <p><strong>Impact Score:</strong> {{ cve_detail.impact_score }}</p>
+
+            {% if cve_detail.cvss_v2_score %}
+                <p><strong>CVSS v2 Score:</strong> {{ cve_detail.cvss_v2_score }}</p>
+            {% else %}
+                <p><strong>CVSS v2 Score:</strong> N/A</p>
+            {% endif %}
+
+            {% if cve_detail.cvss_v3_score %}
+                <p><strong>CVSS v3 Score:</strong> {{ cve_detail.cvss_v3_score }}</p>
+            {% else %}
+                <p><strong>CVSS v3 Score:</strong> N/A</p>
+            {% endif %}
         </div>
 
         <h2>CPE Information</h2>
